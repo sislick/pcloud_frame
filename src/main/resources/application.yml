@@ -1,0 +1,61 @@
+#################################################
+#                                               #
+#                配置数据源                       #
+#                                               #
+#################################################
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource  # 选择Hikari数据源
+    driver-class-name: com.mysql.cj.jdbc.Driver  # mysql驱动
+    url: jdbc:mysql://10.0.8.128:3306/PCloud_frame?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+  hikari:
+    connection-timeout: 30000       # 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQLException， 默认:30秒
+    minimum-idle: 5                 # 最小连接数
+    maximum-pool-size: 20           # 最大连接数
+    auto-commit: true               # 自动提交
+    idle-timeout: 600000            # 连接超时的最大时长（毫秒），超时则被释放（retired），默认:10分钟
+    pool-name: DateSourceHikariCP     # 连接池名字
+    max-lifetime: 1800000           # 连接的生命时长（毫秒），超时而且没被使用则被释放（retired），默认:30分钟 1800000ms
+    connection-test-query: SELECT 1 # 指定校验连接合法性执行的sql语句
+
+##################################################
+#                                                #
+#                  应用名称                        #
+#                                                #
+##################################################
+  application:
+    name: pcloud_frame
+#  profiles:
+#    active: dev
+
+##################################################
+#                                                #
+#                  mybatis 配置                   #
+#                                                #
+##################################################
+mybatis:
+  type-aliases-package: com.pcloud.**.entity
+  mapper-locations: classpath:mappers/*.xml
+
+##################################################
+#                                                #
+#                    其他配置                      #
+#                                                #
+##################################################
+
+server:
+  #端口号
+  port: 8888
+
+##################################################
+#                                                #
+#                   自定义配置                     #
+#                                                #
+##################################################
+pcloud:
+  project:
+    name: PcloudFrame
+    version: v1.0.0
+    author: 霍腾飞
